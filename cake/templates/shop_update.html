@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<p>Вы действительно хотите удалить магазин <b>{{shop.name}}?</b>></p>
+<form action="{% url 'shop_delete' shop.pk %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Да">
+</form>
+<a href="{% url 'shop_list' %}">Нет</a>
+{% endblock %}

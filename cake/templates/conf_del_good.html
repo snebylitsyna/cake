@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<p>Вы действительно хотите удалить ингредиент <b>{{good.name}}?</b>></p>
+<form action="{% url 'good_delete' good.pk %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Да">
+</form>
+<a href="{% url 'good_list' %}">Нет</a>
+{% endblock %}

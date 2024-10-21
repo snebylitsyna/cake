@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Add shop{% endblock title %}
+{% block content %}
+
+<h1>Создать нового производителя</h1>
+<form action="{% url 'manufacturer_create' %}" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Добавить" class="form-button">
+</form>
+<a href="{% url 'manufacturer_list' %}">Перейти в список производителей</a>
+<br>
+<a href="{% url 'admin_edit' %}">Перейти в панель администратора</a>
+{% endblock %}

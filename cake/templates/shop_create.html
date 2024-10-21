@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Add shop{% endblock title %}
+{% block content %}
+
+<h1>Создать новый магазин</h1>
+<form action="{% url 'shop_create' %}" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Добавить" class="form-button">
+</form>
+<a href="{% url 'shop_list' %}">Перейти на список магазинов</a>
+<br>
+<a href="{% url 'admin_edit' %}">Перейти в панель администратора</a>
+{% endblock %}

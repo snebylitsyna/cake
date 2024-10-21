@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Goods
+{% endblock title %}
+
+{% block content %}
+
+<table border="2">
+    <tr>
+        <th>Наименование производителя</th>
+
+    </tr>
+    {% for manufacturer in manufacturers %}
+    <tr>
+        <th>{{manufacturer.name}}</th>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'manufacturer_create' %}">Добавить нового производителя</a>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Shops
+{% endblock title %}
+
+{% block content %}
+
+<table border="2">
+    <tr>
+        <th>Название магазина</th>
+        <th>Город</th>
+        <th>Адрес</th>
+        <th></th>
+    </tr>
+    {% for shop in shops %}
+    <tr>
+        <th>{{shop.name}}</th>
+        <th>{{shop.city}}</th>
+        <th>{{shop.adress}}</th>
+        <th> <a href="{% url 'shop_update' shop.id %}">Редактировать</a> /
+             <a href="{% url 'conf_del_shop' shop.id %}">Удалить</a></th>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'shop_create' %}">Добавить новый магазин</a>
+
+{% endblock %}

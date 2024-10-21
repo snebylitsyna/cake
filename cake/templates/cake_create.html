@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Add cake{% endblock title %}
+{% block content %}
+
+<h1>Создать новый торт</h1>
+<form action="{% url 'cake_create' %}" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Продолжить создание заказа" class="btn btn-success">
+</form>
+<br>
+<a href="{% url 'client_main' %}"  class="btn btn-info">Вернуться на панель клиента</a>
+
+{% endblock %}

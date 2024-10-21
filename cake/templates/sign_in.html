@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<form action="{% url 'sign_in' %}" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Войти" class="btn btn-primary">
+</form>
+<br>
+<a href="{% url 'main' %}" class="btn btn-dark">Перейти на главную</a>
+{% endblock %}

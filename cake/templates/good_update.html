@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% block title %}Редактировать ингредиент{% endblock title %}
+
+<h1>Редактировать ингредиент</h1>
+<h3 style="color: red">Обновите данные ингредиента (если необходимо) и нажмите "Обновить"</h3>
+
+<form action="{% url 'good_update' form.instance.id %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Обновить" class="form-button">
+</form>
+<a href="{% url 'good_list' %}">Перейти на список ингредиентов</a>
+<br>
+<a href="{% url 'admin_edit' %}">Перейти в панель администратора</a>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Add city{% endblock title %}
+{% block content %}
+
+<h1>Создать новый город</h1>
+<form action="{% url 'city_create' %}" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Добавить" class="form-button">
+</form>
+<a href="{% url 'city_list' %}">Перейти на список городов</a>
+<br>
+<a href="{% url 'admin_edit' %}">Перейти в панель администратора</a>
+{% endblock %}

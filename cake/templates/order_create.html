@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Add cake{% endblock title %}
+{% block content %}
+
+<h1>Создать заказ</h1>
+
+<p>{{user.username}} создал торт со следующими параметрами:</p>
+<p>Вес: {{cake.weight}} кг.</p>
+<p>Форма: {{cake.form}}</p>
+<p>Категория: {{cake.category}}</p>
+<p>Фото-пример: {{cake.photo}}</p>
+<p>Цветовая гамма торта: {{cake.color}}</p>
+<p>Надпись: {{cake.inscription}}</p>
+<p>Цена торта составляет: {{cake.price}}, сом.</p>
+<p>Чтобы разместить заказ, необходимо внести предоплату: {{cake.prepayment}}, сом</p>
+
+<br><br>
+<form action="{% url 'order_create' %}" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Разместить заказ" class="btn btn-success">
+</form>
+<br>
+<a href="{% url 'client_main' %}"  class="btn btn-info">Вернуться на панель клиента</a>
+
+{% endblock %}

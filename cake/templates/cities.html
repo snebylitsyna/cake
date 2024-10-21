@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Cities
+{% endblock title %}
+
+{% block content %}
+
+<table border="2">
+    <tr>
+        <th>Название города</th>
+        <th>Название страны</th>
+    </tr>
+    {% for city in cities %}
+    <tr>
+        <th>{{city.name}}</th>
+        <th>{{city.country}}</th>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'city_create' %}">Добавить новый город</a>
+
+{% endblock %}
