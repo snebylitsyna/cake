@@ -63,10 +63,11 @@ class CreateUserForm(UserCreationForm):
 class CakeForm(forms.ModelForm):
     class Meta:
         model = models.Cake
-        fields = ['form', 'category', 'weight', 'photo', 'color', 'inscription']
+        fields = ['form', 'tier', 'filling', 'weight', 'photo', 'color', 'inscription']
         widgets = {
             'form': forms.Select(),
-            'category': forms.Select(),
+            'tier': forms.Select(),
+            'filling': forms.Select(),
             'weight': forms.NumberInput(attrs={'step': 0.50, 'max': 4.00, "min": 1.00}),
             'photo': forms.FileInput(),
             'color': forms.Select(),
@@ -79,6 +80,6 @@ class OrderForm(forms.ModelForm):
         model = models.Order
         fields = ['date_ready', 'shop']
         widgets = {
-            'date_ready': forms.DateInput(),
+            'date_ready': forms.DateInput(attrs={'type': 'date'}),
             'shop': forms.Select(),
         }

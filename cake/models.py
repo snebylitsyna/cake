@@ -82,11 +82,22 @@ class Form(models.Model):
         return f'{self.name}'
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=50, verbose_name="Категория торта")
+class Tier(models.Model):
+    name = models.CharField(max_length=50, verbose_name="Количество ярусов торта (этажей)")
 
     class Meta:
-        verbose_name_plural = "Категория торта"
+        verbose_name_plural = "Количество ярусов торта (этажей)"
+        ordering = ['name']
+
+    def __str__(self):
+        return f'{self.name}'
+
+
+class Filling(models.Model):
+    name = models.CharField(max_length=50, verbose_name="Начинка")
+
+    class Meta:
+        verbose_name_plural = "Начинка"
         ordering = ['name']
 
     def __str__(self):
@@ -133,7 +144,8 @@ class Good(models.Model):
 
 class Cake(models.Model):
     form = models.ForeignKey(Form, on_delete=models.DO_NOTHING, verbose_name="Форма торта")
-    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, verbose_name="Категория торта")
+    tier = models.ForeignKey(Tier, on_delete=models.DO_NOTHING, verbose_name="Количество ярусов торта (этажей)")
+    filling = models.ForeignKey(Filling, on_delete=models.DO_NOTHING, verbose_name="Начинка")
     weight = models.DecimalField(max_digits=6, decimal_places=2, verbose_name="Вес торта")
     photo = models.ImageField(upload_to='goods/', null=True, blank=True, verbose_name="Вставьте фото-пример")
     color = models.ForeignKey(Color, on_delete=models.DO_NOTHING, verbose_name="Основная цветовая гамма")
@@ -142,17 +154,17 @@ class Cake(models.Model):
     prepayment = models.DecimalField(max_digits=6, decimal_places=2, verbose_name='Предоплата 50%')
 
     def __str__(self):
-        return f'{self.form} {self.weight} {self.category}'
+        return f'{self.form} {self.weight} {self.tier} {self.filling}'
 
     class Meta:
         verbose_name_plural = "Торты"
-        ordering = ['category']
+        ordering = ['filling']
 
 
 class Order(models.Model):
     cake = models.ForeignKey(Cake, on_delete=models.DO_NOTHING)
-    date_create = models.DateField(verbose_name='Дата создания заказа',default=datetime.date.today())
-    date_ready = models.DateField(verbose_name='Дата выдачи торта',default=datetime.date.today())
+    date_create = models.DateField(verbose_name='Дата создания заказа', default=datetime.date.today())
+    date_ready = models.DateField(verbose_name='Дата выдачи торта', default=datetime.date.today())
     order_status = models.ForeignKey(OrderStatus, on_delete=models.DO_NOTHING, default=1, verbose_name='Статус заказа')
     shop = models.ForeignKey(Shop, on_delete=models.DO_NOTHING, verbose_name='Магазин для получения торта')
 
